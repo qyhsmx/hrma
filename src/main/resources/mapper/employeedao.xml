@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qyy.hrma.dao.EmployeeDao">
+
+    <resultMap id="empMap" type="emp">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="birthday" property="birthday"/>
+        <result column="createDate" property="createDate"/>
+        <result column="card_id" property="card_id"/>
+        <result column="address" property="address"/>
+        <result column="postcode" property="post_code"/>
+        <result column="tel" property="tel"/>
+        <result column="phone" property="phone"/>
+        <result column="qq_num" property="qq_num"/>
+        <result column="eamil" property="email"/>
+        <result column="sex" property="sex"/>
+        <result column="party" property="party"/>
+        <result column="race" property="race"/>
+        <result column="education" property="education"/>
+        <result column="speciality" property="speciality"/>
+        <result column="hobby" property="hobby"/>
+        <result column="remarks" property="remarks"/>
+        <association property="dept" javaType="com.qyy.hrma.domain.Dept">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="remarks" property="remarks"/>
+        </association>
+        <association property="job" javaType="com.qyy.hrma.domain.Job">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="remarks" property="remarks"/>
+        </association>
+    </resultMap>
+    <select id="getAll" resultMap="empMap">
+      select
+      *
+      from employee
+      where 1=1
+        <if test="sex!=null and sex!='' ">
+            and sex=#{sex}
+        </if>
+        <if test="address!=null and address!='' ">
+            and address like '%#{address}%'
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select
+        count(*)
+        from employee
+        where 1=1
+        <if test="sex!=null and sex!='' ">
+            and sex=#{sex}
+        </if>
+        <if test="address!=null and address!='' ">
+            and address like '%#{address}%'
+        </if>
+    </select>
+</mapper>

@@ -55,6 +55,7 @@ public class UserController {
             User user = hrmService.findByNamePwd(param);
 
             if(user!=null){
+
                 request.getSession().setAttribute("login_user",user);
                 redisTemplate.opsForValue().set("active_user", JSON.toJSONString(user));
                 redisTemplate.expire("active_user",60*30, TimeUnit.SECONDS);

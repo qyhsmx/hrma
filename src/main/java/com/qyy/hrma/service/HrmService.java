@@ -15,5 +15,5 @@ public interface HrmService {
 
     Integer getCount(Map<String,Object> param);
 
-    /*List<Employee> selectByCondition(Map<String,Object> param);*/
+    List<Employee> aheadByAddress(Map<String,Object> param);
 }

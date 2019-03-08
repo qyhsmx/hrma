@@ -2,6 +2,7 @@ package com.qyy.hrma.controller;
 
 
 
+import com.alibaba.fastjson.JSON;
 import com.qyy.hrma.domain.User;
 import com.qyy.hrma.service.HrmService;
 import org.apache.logging.log4j.LogManager;
@@ -11,12 +12,13 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 public class UserController {
@@ -40,8 +42,8 @@ public class UserController {
      * @param param
      * @return
      */
-    @PostMapping("/user/login")
-    public ModelAndView login(@RequestParam Map<String,Object> param){
+    @RequestMapping("/user/login")
+    public ModelAndView login(@RequestParam Map<String,Object> param, HttpServletRequest request){
 
         logger.info("传递的用户名和密码是--"+param);
         ModelAndView mv  = new ModelAndView();
@@ -53,7 +55,10 @@ public class UserController {
             User user = hrmService.findByNamePwd(param);
 
             if(user!=null){
-                redisTemplate.opsForValue().set("active_user",user.getLoginname());
+                request.getSession().setAttribute("login_user",user);
+                redisTemplate.opsForValue().set("active_user", JSON.toJSONString(user));
+                redisTemplate.expire("active_user",60*30, TimeUnit.SECONDS);
+                logger.info("放入redis的值是"+JSON.toJSONString(user));
                 mv.setViewName("main");
                 mv.addObject("user",user);
                 return mv;
@@ -67,11 +72,4 @@ public class UserController {
         }
     }
 
-    /**
-     * 首页加载相关内容
-     */
-    /*@PostMapping()
-    public ModelAndView firstPage(){
-
-    }*/
 }

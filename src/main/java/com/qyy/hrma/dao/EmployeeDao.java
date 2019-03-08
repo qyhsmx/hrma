@@ -16,4 +16,6 @@ public interface EmployeeDao {
 
     Integer getCount(Map<String, Object> param);
 
+    List<Employee> aheadByAddress(Map<String, Object> param);
+
 }

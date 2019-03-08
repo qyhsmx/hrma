@@ -1,5 +1,7 @@
 package com.qyy.hrma.interceptor;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.lang.Nullable;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -9,10 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoginIntercepter implements  HandlerInterceptor{
 
+    @Autowired
+    private StringRedisTemplate redisTemplate;
     @Override
     public  boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        System.out.println("自定义拦截器生效了");
+        //如果在session中没有当前请求用户的信息，则不放行
+
 
         return true;
     }

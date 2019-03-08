@@ -58,4 +58,12 @@
             and address like '%#{address}%'
         </if>
     </select>
+
+    <select id="aheadByAddress" resultType="emp">
+        select
+        address
+        from employee
+        where
+        address like concat('%',#{address},'%');
+    </select>
 </mapper>

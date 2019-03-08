@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+    String path = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
-    <base href="${basePath}">
+    <base href="${path}">
 	<meta charset="utf-8"> 
 	<title>人事管理系统</title>
 	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -87,11 +90,9 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">公告管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">部门查询</a></dd>
-                    <dd><a href="">添加公告</a></dd>
+                    <dd><a href="/notice/addNotice">添加公告</a></dd>
                 </dl>
             </li>
-
         </ul>
 
     </div>
@@ -320,7 +321,7 @@
 
             $("#siteName").typeahead({
                 source: function (query, process) {
-                    $.post('/employee/getByad', {addresss: query}, function (data) {
+                    $.post('/employee/getByad', {address: query}, function (data) {
                         console.log(data);
                         for(i in data) {
                             data[i] = data[i].address

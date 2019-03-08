@@ -4,6 +4,7 @@ package com.qyy.hrma.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import com.qyy.hrma.interceptor.SessionFilter;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -11,6 +12,7 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -54,5 +56,16 @@ public class DbConfig {
         bean.setInitParameters(initParams);
         bean.setUrlPatterns(Arrays.asList("/*"));
         return  bean;
+    }
+
+    @Bean
+    public FilterRegistrationBean filterRegistrationBean(){
+        FilterRegistrationBean<Filter> registrationBean = new FilterRegistrationBean<>();
+
+        registrationBean.setFilter(new SessionFilter());
+        registrationBean.addUrlPatterns("/employee/*");
+        registrationBean.addUrlPatterns("/user/*");
+        registrationBean.addUrlPatterns("/notice/*");
+        return registrationBean;
     }
 }

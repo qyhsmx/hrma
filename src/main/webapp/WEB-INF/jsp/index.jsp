@@ -15,6 +15,8 @@
 		src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script
 		src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="/layui/css/layui.css">
+	<script src="/layui/layui.js"></script>
 	<style>
 		.body_class{
 			background-image: url("/image/冰雪公主.jpg");
@@ -85,4 +87,9 @@
 		</div>
 	</div>
 </body>
+<script>
+	layui.use(['layer'],function(){
+
+	});
+</script>
 </html>

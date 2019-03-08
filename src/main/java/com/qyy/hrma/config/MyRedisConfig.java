@@ -41,14 +41,17 @@ public class MyRedisConfig extends CachingConfigurerSupport {
     public RedisTemplate<String, Object> redisTemplate(JedisConnectionFactory jedisConnectionFactory ) {
         //设置序列化
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+
         jackson2JsonRedisSerializer.setObjectMapper(om);
         // 配置redisTemplate
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
         redisTemplate.setConnectionFactory(jedisConnectionFactory);
         RedisSerializer stringSerializer = new StringRedisSerializer();
+
         redisTemplate.setKeySerializer(stringSerializer); // key序列化
         redisTemplate.setValueSerializer(jackson2JsonRedisSerializer); // value序列化
         redisTemplate.setHashKeySerializer(stringSerializer); // Hash key序列化

@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+    String path = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
-    <base href="${basePath}">
+    <base href="${path}">
 	<meta charset="utf-8"> 
 	<title>人事管理系统</title>
 	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -87,8 +90,7 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">公告管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">部门查询</a></dd>
-                    <dd><a href="">添加公告</a></dd>
+                    <dd><a href="/notice/addNotice">添加公告</a></dd>
                 </dl>
             </li>
 
@@ -114,17 +116,16 @@
             <div class="layui-row">
                 <div  class="layui-col-md4">
                     <div class="layui-card layui-bg-green">
-                        <div class="layui-card-header">卡片面板</div>
-                        <div class="layui-card-body ">
-                            卡片式面板面板通常用于非白色背景色的主体内<br>
-                            从而映衬出边框投影
+                        <div class="layui-card-header">通知</div>
+                        <div class="layui-card-body " id="noticeCard">
+
                         </div>
                     </div>
                 </div>
 
                 <div  class="layui-col-md4">
                     <div class="layui-card layui-bg-red">
-                        <div class="layui-card-header">卡片面板</div>
+                        <div class="layui-card-header">待办</div>
                         <div class="layui-card-body ">
                             卡片式面板面板通常用于非白色背景色的主体内<br>
                             从而映衬出边框投影
@@ -133,7 +134,7 @@
                 </div>
                 <div  class="layui-col-md4">
                     <div class="layui-card">
-                        <div class="layui-card-header">卡片面板</div>
+                        <div class="layui-card-header">未开发面板</div>
                         <div class="layui-card-body">
                             卡片式面板面板通常用于非白色背景色的主体内<br>
                             从而映衬出边框投影
@@ -163,10 +164,28 @@
 <script type="text/javascript">
 
     $(function () {
-       layui.use(['element'],function () {
-           var element = layui.element;
-       });
+        layui.use(['element'],function () {
+            var element = layui.element;
+
+        });
+        $.ajax({
+            url: '/notice/getNotice',
+            type: 'post',
+            data: 'json',
+            dataType: 'json',
+            success: function (data) {
+
+               // console.log(data);
+                //console.log(data.article);
+                var con = $(data.article);
+                var timePerson = $("<p>发布时间："+data.date+"  发布人："+data.submitPerson+"</p>");
+
+                $("#noticeCard").append(con).append(timePerson);
+            }
+        })
+
     });
+
 
 </script>
 </html>

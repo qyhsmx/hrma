@@ -42,8 +42,10 @@ public class HrmServiceImpl implements HrmService {
         return employeeDao.getCount(param);
     }
 
-    /*@Override
-    public List<Employee> selectByCondition(Map<String, Object> param) {
-        return employeeDao.getByCon(param);
-    }*/
+    @Override
+    public List<Employee> aheadByAddress(Map<String, Object> param) {
+        return employeeDao.aheadByAddress(param);
+    }
+
+
 }

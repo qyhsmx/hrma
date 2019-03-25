@@ -57,4 +57,10 @@ public class EmpController {
         System.out.println("查到的数据是-------"+employees);
         return new GridModel<Employee>("true","查询数据成功",employees,count);
     }
+
+
+    @RequestMapping("/toMain")
+    public String toMain(){
+        return "main";
+    }
 }

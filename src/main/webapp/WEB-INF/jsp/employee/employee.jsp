@@ -41,7 +41,7 @@
     <div class="layui-header">
         <ul class="layui-nav layui-bg-blue">
             <li class="layui-nav-item">
-                <a href="">控制台<span class="layui-badge">9</span></a>
+                <a href="/employee/toMain">控制台<span class="layui-badge">9</span></a>
             </li>
             <li class="layui-nav-item">
                 <a href="">个人中心<span class="layui-badge-dot"></span></a>

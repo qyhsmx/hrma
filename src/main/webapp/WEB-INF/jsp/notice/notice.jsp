@@ -36,6 +36,10 @@
 		<div class="layui-row">
 			<form class="layui-form" action="/notice/releaseNotice" method="post">
 				<input type="hidden" name="u_id" value="${user.id}">
+				<div class="layui-form-item layui-form-pane">
+
+
+
 				<div class="layui-form-item">
 					<div class="editormd" id="test-editormd">
 						<textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc" id="content"></textarea>
@@ -43,17 +47,17 @@
 						<textarea class="editormd-html-textarea" name="editormd-html-textarea" id="htmlContent"></textarea>
 					</div>
 				</div>
-				<div class="layui-form-item">
-					<div class="layui-inline">
-						<label class="layui-form-label">发布人</label>
-						<div class="layui-input-inline">
-							<input type="text" class="layui-input" name="submitPerson">
-						</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">发布人</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input" name="submitPerson">
 					</div>
+				</div>
 
-					<div class="layui-inline">
-						<button class="layui-btn-danger" type="submit" id="submitBtn">提交</button>
-					</div>
+				<div class="layui-inline">
+					<button class="layui-btn-danger" type="submit" id="submitBtn">提交</button>
+					<input type="submit" class="layui-btn-danger" value="提交">
+				</div>
 				</div>
 			</form>
 		</div>

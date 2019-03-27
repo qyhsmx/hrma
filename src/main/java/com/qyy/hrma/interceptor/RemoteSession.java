@@ -6,17 +6,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import redis.clients.jedis.Jedis;
 
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.concurrent.TimeUnit;
 
 public class RemoteSession extends HttpServletRequestWrapper {
 
@@ -32,6 +29,8 @@ public class RemoteSession extends HttpServletRequestWrapper {
 }
 //配置代理类
 class RemoteSessionHandler implements InvocationHandler{
+
+    private Logger logger = LogManager.getLogger(SessionFilter.class);
 
     @Autowired
     private RedisTemplate redisTemplate;
@@ -57,7 +56,7 @@ class RemoteSessionHandler implements InvocationHandler{
             Jedis jedis = MyRedis.getJedis();
             jedis.set(userKey, JSON.toJSONString(args[1]));
             jedis.expire(userKey,30*60);
-            System.out.println("存入代理session的键是"+userKey+"---value是"+args[1]);
+            logger.info("存入代理session的键是"+userKey+"---value是"+args[1]);
 
         }else if("getAttribute".equals(method.getName())){
             Jedis jedis = MyRedis.getJedis();

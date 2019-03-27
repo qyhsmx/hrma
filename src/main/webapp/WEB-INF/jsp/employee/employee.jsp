@@ -227,7 +227,14 @@
                     title: '性别',
                     width : 200,
                     align: 'center',
-                    valign: 'middle'
+                    valign: 'middle',
+                    formatter: function (value) {
+                        if(value==1){
+                            return "男";
+                        }else {
+                            return "女";
+                        }
+                    }
                 },
                 {
                     field: 'phone',

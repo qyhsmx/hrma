@@ -53,7 +53,7 @@
 				<form class="form-horizontal" role="form" action="/user/login"
 					method="post">
 					<div class="form-group">
-						<label for="loginname" class="col-sm-2 control-label">用户</label>
+						<label for="loginname" class="col-sm-2 control-label">用户名</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="loginname"
 								name="loginname" placeholder="请输入名字" />

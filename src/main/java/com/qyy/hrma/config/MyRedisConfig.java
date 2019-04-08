@@ -34,8 +34,12 @@ public class MyRedisConfig extends CachingConfigurerSupport {
         RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager
                 .RedisCacheManagerBuilder
                 .fromConnectionFactory(jedisConnectionFactory);
+
+
         return builder.build();
     }
+
+
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(JedisConnectionFactory jedisConnectionFactory ) {
@@ -49,6 +53,7 @@ public class MyRedisConfig extends CachingConfigurerSupport {
         jackson2JsonRedisSerializer.setObjectMapper(om);
         // 配置redisTemplate
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
+
         redisTemplate.setConnectionFactory(jedisConnectionFactory);
         RedisSerializer stringSerializer = new StringRedisSerializer();
 
@@ -57,6 +62,8 @@ public class MyRedisConfig extends CachingConfigurerSupport {
         redisTemplate.setHashKeySerializer(stringSerializer); // Hash key序列化
         redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer); // Hash value序列化
         redisTemplate.afterPropertiesSet();
+
+
         return redisTemplate;
     }
 

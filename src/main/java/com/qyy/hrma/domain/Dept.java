@@ -1,6 +1,8 @@
 package com.qyy.hrma.domain;
 
-public class Dept {
+import java.io.Serializable;
+
+public class Dept implements Serializable {
   private Integer id;
   private String name;
   private String remarks;

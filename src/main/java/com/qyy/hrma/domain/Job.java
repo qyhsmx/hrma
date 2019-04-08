@@ -1,6 +1,8 @@
 package com.qyy.hrma.domain;
 
-public class Job {
+import java.io.Serializable;
+
+public class Job implements Serializable {
  private Integer id;
  private String name;
  private String remarks;

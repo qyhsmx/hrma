@@ -1,5 +1,6 @@
 package com.qyy.hrma.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @author QinYong
  * @param <T>
  */
-public class GridModel<T> {
+public class GridModel<T> implements Serializable {
 
     private String status;
     private String msg;

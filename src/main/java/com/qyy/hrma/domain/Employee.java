@@ -3,10 +3,11 @@ package com.qyy.hrma.domain;
 import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Alias("emp")
-public class Employee {
+public class Employee implements Serializable {
   private Integer id;
   private Dept dept;
   private Job job;

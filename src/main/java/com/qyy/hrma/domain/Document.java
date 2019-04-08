@@ -2,9 +2,10 @@ package com.qyy.hrma.domain;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Document {
+public class Document implements Serializable {
    private Integer id;
    private String title;
    private String filename;

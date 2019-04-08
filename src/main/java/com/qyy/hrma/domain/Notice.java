@@ -1,8 +1,9 @@
 package com.qyy.hrma.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Notice {
+public class Notice implements Serializable {
    private Integer id;
    private String title;
    private String content;
